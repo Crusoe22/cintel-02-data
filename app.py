@@ -43,7 +43,10 @@ with ui.sidebar(open="open"):
 #   a list of options for the input (in square brackets) 
 #   e.g. ["bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g"]
     
-    ui.input_selectize("selected_attribute", "Body Measurement in Millimeters", ["bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g"])
+    ui.input_selectize("selected_attribute", "Body Measurement in Millimeters", ["bill_length_mm", 
+                                                                                 "bill_depth_mm", 
+                                                                                 "flipper_length_mm", 
+                                                                                 "body_mass_g"]) #Maybe change categories
 
 
     
@@ -52,6 +55,9 @@ with ui.sidebar(open="open"):
 #   the name of the input (in quotes), e.g. "plotly_bin_count"
 #   the label for the input (in quotes)
 
+    ui.input_numeric("plotly_bin_count", "Bin Count", 10)
+
+    
 # Use ui.input_slider() to create a slider input for the number of Seaborn bins
 #   pass in four arguments:
 #   the name of the input (in quotes), e.g. "seaborn_bin_count"
@@ -59,6 +65,7 @@ with ui.sidebar(open="open"):
 #   the minimum value for the input (as an integer)
 #   the maximum value for the input (as an integer)
 #   the default value for the input (as an integer)
+    ui.input_slider("seaborn_bin_count", "Label for Input", 1, 100, 50)
 
 # Use ui.input_checkbox_group() to create a checkbox group input to filter the species
 #   pass in five arguments:
@@ -68,12 +75,25 @@ with ui.sidebar(open="open"):
 #   a keyword argument selected= a list of selected options for the input (in square brackets)
 #   a keyword argument inline= a Boolean value (True or False) as you like
 
+    ui.input_checkbox_group("selected_species_lis", "Selected Species of Penguins", ["Adelie", "Gentoo", "Chinstrap"], selected="", inline=False)
+
+
+    
 # Use ui.hr() to add a horizontal rule to the sidebar
+
+    ui.hr()
 
 # Use ui.a() to add a hyperlink to the sidebar
 #   pass in two arguments:
 #   the text for the hyperlink (in quotes), e.g. "GitHub"
 #   a keyword argument href= the URL for the hyperlink (in quotes), e.g. your GitHub repo URL
 #   a keyword argument target= "_blank" to open the link in a new tab
+
+    ui.a()
+
+
+
+
+    
 
 # When passing in multiple arguments to a function, separate them with commas.
