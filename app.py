@@ -82,3 +82,19 @@ with ui.card(full_screen=True):
                           facet_row="species", facet_col="sex", title="Penguin Scatterplot", labels={"flipper_length_mm": "Flipper Length (mm)", "bill_length_mm": "Bill Length (mm)"})
 
 
+# Pie Chart plot
+with ui.card(full_screen=True):
+
+    ui.card_header("Plotly Pie Chart: Body Mass")
+
+    @render_plotly
+    def plotly_pie():
+        pie_chart = px.pie(penguins_df, values="body_mass_g", names="island", title="Body mass on Islands")
+        return pie_chart
+
+    @render_plotly
+    def plotly_pie_s():
+        pie_chart = px.pie(penguins_df, values="body_mass_g", names="species", title="Body mass from Species")
+        return pie_chart
+
+
