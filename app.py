@@ -11,17 +11,6 @@ penguins_df = palmerpenguins.load_penguins()
 
 ui.page_opts(title="Nolan's Penguin Data", fillable=True)
 
-# Plot Charts
-with ui.layout_columns():
-
-    @render_plotly
-    def plot1():
-        return px.histogram(px.data.tips(), y="tip")
-
-    @render_plotly
-    def plot2():
-        return px.histogram(px.data.tips(), y="total_bill")
-
 #Shiny UI sidebar for user interaction
 with ui.sidebar(open="open"):
     ui.h2("Sidebar")
@@ -46,16 +35,6 @@ with ui.sidebar(open="open"):
     # Add a hyperlink to the sidebar
     ui.a("GitHub", href="https://github.com/Crusoe22/cintel-02-data.git", target="_blank")
 
-# Show Data
-with ui.layout_columns():
-
-    @render.data_frame
-    def penguins_datatable():
-        return render.DataTable(penguins_df) 
-
-    @render.data_frame
-    def penguins_grid():
-        return render.DataGrid(penguins_df)
 
 # Plot Charts
 with ui.layout_columns():
@@ -69,6 +48,17 @@ with ui.layout_columns():
     @render.plot  
     def plot_sns():  
         return sns.histplot(penguins_df, x="species", kde=False)
+
+# Show Data
+with ui.layout_columns():
+
+    @render.data_frame
+    def penguins_datatable():
+        return render.DataTable(penguins_df) 
+
+    @render.data_frame
+    def penguins_grid():
+        return render.DataGrid(penguins_df)
 
 #Create Scatter plot
 with ui.card(full_screen=True):
