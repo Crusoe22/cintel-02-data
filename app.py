@@ -1,18 +1,13 @@
 import plotly.express as px
 from shiny.express import input, ui
-from shinywidgets import render_plotly
+from shinywidgets import render_plotly, output_widget, render_widget
 import palmerpenguins  # This package provides the Palmer Penguins dataset
 import pandas
-
+from shiny import render
+import seaborn as sns
 
 # Use the built-in function to load the Palmer Penguins dataset
 penguins_df = palmerpenguins.load_penguins()
-
-head_df = penguins_df.head()
-print(head_df)
-describe_df = penguins_df.describe()
-print(describe_df)
-
 
 ui.page_opts(title="Nolan's Penguin Data", fillable=True)
 with ui.layout_columns():
@@ -89,11 +84,45 @@ with ui.sidebar(open="open"):
 #   a keyword argument href= the URL for the hyperlink (in quotes), e.g. your GitHub repo URL
 #   a keyword argument target= "_blank" to open the link in a new tab
 
-    ui.a()
+    ui.a("GitHub", href="https://github.com/Crusoe22/cintel-02-data.git", target="_blank")
 
-
-
-
-    
 
 # When passing in multiple arguments to a function, separate them with commas.
+
+
+with ui.layout_columns():
+
+    @render.data_frame
+    def penguins_datatable():
+        return render.DataTable(penguins_df) 
+
+    @render.data_frame
+    def penguins_grid():
+        return render.DataGrid(penguins_df)
+
+with ui.layout_columns():
+    @render_plotly  
+    def plot_plt():  
+        return px.histogram(penguins_df,
+            x="body_mass_g",
+            title="Penguin Mass",
+            labels={"body_mass_g": "Body Mass (g)", "count": "Count"})
+        
+    @render.plot  
+    def plot_sns():  
+        return sns.histplot(penguins_df, x="species", kde=False)
+
+
+with ui.card(full_screen=True):
+
+    ui.card_header("Plotly Scatterplot: Species")
+
+    @render_plotly
+    def plotly_scatterplot():
+        # Create a Plotly scatterplot using Plotly Express
+        # Call px.scatter() function
+        # Pass in six arguments:
+        return px.scatter(penguins_df, x="flipper_length_mm", y="bill_length_mm", color="species", 
+                          facet_row="species", facet_col="sex", title="Penguin Scatterplot")
+
+
