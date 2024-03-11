@@ -123,6 +123,6 @@ with ui.card(full_screen=True):
         # Call px.scatter() function
         # Pass in six arguments:
         return px.scatter(penguins_df, x="flipper_length_mm", y="bill_length_mm", color="species", 
-                          facet_row="species", facet_col="sex", title="Penguin Scatterplot")
+                          facet_row="species", facet_col="sex", title="Penguin Scatterplot", labels={"flipper_length_mm": "Flipper Length (mm)", "bill_length_mm": "Bill Length (mm)"})
 
 
